@@ -7,7 +7,7 @@ A simple Shiny for R dashboard for exploring Japanese beetle occurrence data.
 Install the required R packages from the R console:
 
 ```r
-install.packages(c("shiny", "DT"))
+install.packages(c("shiny", "DT", "ggplot2", "countrycode"))
 ```
 
 ## Running the App
@@ -15,11 +15,11 @@ install.packages(c("shiny", "DT"))
 From the R console:
 
 ```r
-shiny::runApp("src/app.R")
+shiny::runApp("app.R")
 ```
 
 Or from the terminal:
 
 ```bash
-Rscript -e 'shiny::runApp("src/app.R")'
+Rscript -e 'shiny::runApp("app.R")'
 ```

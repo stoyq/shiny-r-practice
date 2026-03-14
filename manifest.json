@@ -1399,10 +1399,10 @@
   },
   "files": {
     ".Rprofile": {
-      "checksum": "f5837ac8c20137bceb6ba178134f28e8"
+      "checksum": "808a6c1eafd824e3e291ef75fafe66ba"
     },
     "app.R": {
-      "checksum": "a3c0ae699f91dafe6b682dd3586bc0d0"
+      "checksum": "5a962e4ee8031cb0168b98469ed3eea0"
     },
     "data/raw/gbif-beetle.csv": {
       "checksum": "0d1be069b2d8400c1fb624aa1944eb41"
