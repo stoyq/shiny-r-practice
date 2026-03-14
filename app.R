@@ -2,7 +2,7 @@ library(shiny)
 library(DT)
 
 beetle_df <- read.csv(
-  file.path("..", "data", "raw", "gbif-beetle.csv"),
+  file.path("data", "raw", "gbif-beetle.csv"),
   sep = "\t"
 )
 
