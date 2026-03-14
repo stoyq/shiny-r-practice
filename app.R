@@ -1,22 +1,33 @@
-library(shiny)
-library(DT)
-library(ggplot2)
-library(countrycode)
+# Japanese Beetle Tracker - Shiny for R
+# Individual assignment
 
+library(shiny)
+library(DT)         # interactive data tables
+library(ggplot2)    # plots
+library(countrycode) # maps ISO country codes to continents
+
+# Load the raw data (tab-separated)
 beetle_df <- read.csv(
   file.path("data", "raw", "gbif-beetle.csv"),
   sep = "\t"
 )
 
+# get continent from the ISO2 country code column
+# e.g. "US" -> "Americas", "DE" -> "Europe"
 beetle_df$continent <- countrycode(
   beetle_df$countryCode,
   origin = "iso2c",
   destination = "continent"
 )
 
+# Year slider range
 YEAR_MIN <- min(beetle_df$year, na.rm = TRUE)
 YEAR_MAX <- max(beetle_df$year, na.rm = TRUE)
 
+# --- UI ---
+# Sidebar: year range filter
+# Main panel (top): timeseries plot and continent pie chart
+# Main panel (bottom): full filtered data table
 ui <- fluidPage(
   titlePanel("Japanese Beetle Tracker"),
   sidebarLayout(
@@ -42,7 +53,10 @@ ui <- fluidPage(
   )
 )
 
+# --- Server ---
 server <- function(input, output, session) {
+  # Reactive dataframe: filters rows to the selected year range
+  # All outputs below depend on this, so they all update when the slider changes
   filtered_df <- reactive({
     beetle_df[
       !is.na(beetle_df$year) &
@@ -51,6 +65,7 @@ server <- function(input, output, session) {
     ]
   })
 
+  # Line chart: number of observations per year
   output$plot_timeseries <- renderPlot({
     counts <- aggregate(gbifID ~ year, data = filtered_df(), FUN = length)
     names(counts)[2] <- "count"
@@ -62,6 +77,7 @@ server <- function(input, output, session) {
       theme_minimal()
   })
 
+  # Pie chart: share of observations per continent
   output$plot_continent <- renderPlot({
     counts <- aggregate(gbifID ~ continent, data = filtered_df(), FUN = length)
     names(counts)[2] <- "count"
@@ -74,6 +90,7 @@ server <- function(input, output, session) {
       theme_void()
   })
 
+  # Interactive table: all columns from the filtered dataset
   output$table <- renderDT({
     datatable(filtered_df(), options = list(pageLength = 25, scrollX = TRUE))
   })
