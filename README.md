@@ -6,6 +6,8 @@ Live app: [link to deployed app](https://019ceb54-87b7-f205-a239-f86b08a118bf.sh
 
 A simple Shiny for R dashboard for exploring Japanese beetle occurrence data.
 
+![App snapshot](img/snapshot.png)
+
 ## Requirements
 
 Install the required R packages from the R console:
