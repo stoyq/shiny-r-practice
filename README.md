@@ -1,5 +1,9 @@
 # Japanese Beetle Tracker (Shiny for R)
 
+## About
+
+Live app: [link to deployed app](https://019ceb54-87b7-f205-a239-f86b08a118bf.share.connect.posit.cloud/)
+
 A simple Shiny for R dashboard for exploring Japanese beetle occurrence data.
 
 ## Requirements
